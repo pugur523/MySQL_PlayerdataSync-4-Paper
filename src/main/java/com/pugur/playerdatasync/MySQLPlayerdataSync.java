@@ -153,7 +153,7 @@ public class MySQLPlayerdataSync extends JavaPlugin implements Listener {
                         } else if (conn_flag) {
                             logger.info("conn_flag is true");
                             if (counter < 100) {
-                                delayTask(() -> loadPlayerDataFromDatabase(player), 25, TimeUnit.MILLISECONDS);
+                                delayTask(() -> loadPlayerDataFromDatabase(player), 50, TimeUnit.MILLISECONDS);
                             } else {
                                 if (saving_flag) {
                                     logger.info("saving_flag is true");
