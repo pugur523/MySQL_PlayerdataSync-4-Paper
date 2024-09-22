@@ -2,4 +2,3 @@ name: MySQL-Playerdata-Sync
 version: '1.0.0'
 main: com.pugur.playerdatasync.MySQLPlayerdataSync
 api-version: '1.19'
-depend: [NBTAPI]

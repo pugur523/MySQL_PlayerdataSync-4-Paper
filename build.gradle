@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id ("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 group = 'com.pugur'
@@ -23,7 +24,10 @@ repositories {
 
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT"
-    compileOnly("de.tr7zw:item-nbt-api-plugin:2.12.2")
+    compileOnly "de.tr7zw:item-nbt-api-plugin:${project.nbt_api_version}"
+    compileOnly "mysql:mysql-connector-java:${project.jdbc_version}"
+    implementation("de.tr7zw:item-nbt-api:${project.nbt_api_version}")
+    implementation("mysql:mysql-connector-java:${project.jdbc_version}")
 }
 
 def targetJavaVersion = 17
@@ -51,4 +55,12 @@ processResources {
     filesMatching('paper-plugin.yml') {
         expand props
     }
+}
+
+shadowJar {
+    relocate("de.tr7zw.changeme.nbtapi", "de.tr7zw.nbtapi")
+}
+
+build {
+    dependsOn(shadowJar)
 }

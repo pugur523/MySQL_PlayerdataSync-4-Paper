@@ -1,6 +1,5 @@
 package com.pugur.playerdatasync;
 
-import com.destroystokyo.paper.event.server.ServerExceptionEvent;
 import de.tr7zw.nbtapi.NBT;
 import de.tr7zw.nbtapi.iface.ReadWriteNBT;
 import net.kyori.adventure.text.Component;
@@ -55,9 +54,15 @@ public class MySQLPlayerdataSync extends JavaPlugin implements Listener {
             this.setEnabled(false);
             return;
         }
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            logger.error("Paper Playerdata Sync : " + e.getMessage());
+        }
 
         getServer().getPluginManager().registerEvents(this, this);
         createTable();
+
         getLevelName();
         logger.info("server name is : " + SERVER_NAME);
         logger.info("Paper Playerdata Sync is enabled🔥");
